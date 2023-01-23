@@ -25,10 +25,23 @@ async function platformExistsInDatabase(name: string): Promise <boolean> {
     return response
 }
 
+async function platformIdExistsInDatabase(id: number): Promise <boolean> {
+    let response: boolean = true
+    const platformIdExists = await connection.query(
+        'SELECT * FROM platforms WHERE id=$1;',
+        [id]
+    );
+    if (!platformIdExists.rows[0]){
+        response = false;
+    }
+    return response
+}
+
 const platformRepository = {
     findPlatforms,
     insertPlatform,
-    platformExistsInDatabase
+    platformExistsInDatabase,
+    platformIdExistsInDatabase
 }
 
 export default platformRepository;

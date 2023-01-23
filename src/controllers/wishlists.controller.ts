@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import wishlistRepository from "../repositories/wishlists.repository.js";
-import { UpdateUserMovie, UserMovie } from "../schemas/movies.schemas.js";
+import { UpdateUserMovie, UserMovie, WishlistMovie } from "../schemas/movies.schemas.js";
 import wishlistService from "../services/wishlists.service.js";
 
-export async function listWishlistByUsername(req: Request, res: Response): (Promise<object | void>) {
+export async function listWishlistByUsername(req: Request<{ username: string}>, res: Response): (Promise<object | void>) {
     const params = req.params;
 
     try{
@@ -46,7 +46,7 @@ export async function updateMovieInWishlist(req: Request, res: Response): Promis
     }
 }
 
-export async function deleteMovieInWishListById(req: Request, res: Response): Promise<void> {
+export async function deleteMovieInWishListById(req: Request<{ id: string}>, res: Response): Promise<void> {
     const params = req.params;
 
     try{
