@@ -6,6 +6,6 @@ export type Label = {
 }
 
 export const LabelSchema = Joi.object({
-    name: Joi.string().required,
+    name: Joi.string().required(),
 })
 

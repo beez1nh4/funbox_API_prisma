@@ -13,9 +13,23 @@ async function insertGenre(name:string): Promise<void> {
     return
 }
 
+async function genreExistsInDatabase(name: string): Promise <boolean> {
+    let response: boolean = true
+    const genreExists = await connection.query(
+        'SELECT * FROM genres WHERE name=$1;',
+        [name]
+    );
+    if (!genreExists.rows[0]){
+        response = false;
+    }
+    return response
+}
+
 const genreRepository = {
     findGenres,
-    insertGenre
+    insertGenre,
+    genreExistsInDatabase
 }
+
 
 export default genreRepository;

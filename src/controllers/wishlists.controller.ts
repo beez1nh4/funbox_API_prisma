@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import wishlistRepository from "../repositories/wishlists.repository.js";
 import { UpdateUserMovie, UserMovie } from "../schemas/movies.schemas.js";
+import wishlistService from "../services/wishlists.service.js";
 
 export async function listWishlistByUsername(req: Request, res: Response): (Promise<object | void>) {
     const params = req.params;
@@ -18,11 +19,10 @@ export async function postMovieInWishlist(req: Request, res: Response): Promise<
     const body = req.body as UserMovie;
  
     try{
-        await wishlistRepository.insertMovieInWishList(body.usernameId, body.movieId);
+        await wishlistService.postOriginalWishlistMovie(res, body.usernameId, body.movieId);
         res.sendStatus(201);
         return
     } catch (err){
-        res.sendStatus(500);
         return
     }
 }

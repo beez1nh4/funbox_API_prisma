@@ -38,11 +38,24 @@ async function deleteMovieInWishList(id: number): Promise<void> {
     return
 }
 
+async function movieWishExistsInDatabase(usernameId: number, movieId: number): Promise <boolean> {
+    let response: boolean = true
+    const movieWishExists = await connection.query(
+        'SELECT * FROM "usersMovies" WHERE "usernameId"=$1 AND "movieId"=$2;',
+        [usernameId, movieId]
+    );
+    if (!movieWishExists.rows[0]){
+        response = false;
+    }
+    return response
+}
+
 const wishlistRepository = {
     findMoviesInWishListByUsername,
     insertMovieInWishList,
     changeStatusMovieInWishList,
-    deleteMovieInWishList
+    deleteMovieInWishList,
+    movieWishExistsInDatabase
 }
 
 export default wishlistRepository;

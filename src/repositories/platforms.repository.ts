@@ -13,9 +13,22 @@ async function insertPlatform(name:string): Promise<void> {
     return
 }
 
+async function platformExistsInDatabase(name: string): Promise <boolean> {
+    let response: boolean = true
+    const platformExists = await connection.query(
+        'SELECT * FROM platforms WHERE name=$1;',
+        [name]
+    );
+    if (!platformExists.rows[0]){
+        response = false;
+    }
+    return response
+}
+
 const platformRepository = {
     findPlatforms,
-    insertPlatform
+    insertPlatform,
+    platformExistsInDatabase
 }
 
 export default platformRepository;

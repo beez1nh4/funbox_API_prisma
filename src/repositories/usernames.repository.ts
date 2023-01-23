@@ -13,9 +13,22 @@ async function insertUsername(name:string): Promise<void> {
     return
 }
 
+async function usernameExistsInDatabase(name: string): Promise <boolean> {
+    let response: boolean = true
+    const usernameExists = await connection.query(
+        'SELECT * FROM usernames WHERE name=$1;',
+        [name]
+    );
+    if (!usernameExists.rows[0]){
+        response = false;
+    }
+    return response
+}
+
 const usernameRepository = {
     findUsernames,
-    insertUsername
+    insertUsername,
+    usernameExistsInDatabase
 }
 
 export default usernameRepository;

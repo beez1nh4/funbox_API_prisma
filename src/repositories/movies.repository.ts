@@ -13,9 +13,22 @@ async function insertMovie(name:string, platformId: number, genreId: number): Pr
     return
 }
 
+async function movieExistsInDatabase(name: string): Promise <boolean> {
+    let response: boolean = true
+    const movieExists = await connection.query(
+        'SELECT * FROM movies WHERE name=$1;',
+        [name]
+    );
+    if (!movieExists.rows[0]){
+        response = false;
+    }
+    return response
+}
+
 const movieRepository = {
     findMovies,
-    insertMovie
+    insertMovie,
+    movieExistsInDatabase
 }
 
 export default movieRepository;
