@@ -4,6 +4,7 @@ import moviesRouter from "./routes/movies.route.js";
 import genresRouter from "./routes/genres.route.js";
 import platformsRouter from "./routes/platforms.route.js"
 import usernamesRouter from "./routes/usernames.route.js";
+import wishlistRouter from "./routes/wishlists.route.js";
 
 dotenv.config();
 
@@ -13,5 +14,6 @@ app.use(moviesRouter);
 app.use(genresRouter);
 app.use(platformsRouter);
 app.use(usernamesRouter);
+app.use(wishlistRouter);
 
 app.listen(4000, () => console.log(`Server running in port: 4000`));

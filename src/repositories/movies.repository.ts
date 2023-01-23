@@ -1,7 +1,8 @@
 import { QueryResult } from "pg";
 import {connection} from "../database/database.js";
+import { Movie } from "../schemas/movies.schemas.js";
 
-async function findMovies(): Promise <QueryResult <any>> {
+async function findMovies(): Promise <QueryResult <Movie>> {
     return connection.query("SELECT * FROM movies;");
 }
 

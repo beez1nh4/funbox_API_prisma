@@ -27,8 +27,8 @@ CREATE TABLE "movies" (
 
 CREATE TABLE "usersMovies" (
 	id SERIAL NOT NULL PRIMARY KEY,
-	"usernameId" INTEGER NOT NULL UNIQUE REFERENCES "usernames"(id),
-    "movieId" INTEGER NOT NULL UNIQUE REFERENCES "movies"(id),
+	"usernameId" INTEGER NOT NULL REFERENCES "usernames"(id),
+    "movieId" INTEGER NOT NULL REFERENCES "movies"(id),
 	"comment" TEXT DEFAULT 'nothing to say',
-    "status" "movieStatus" NOT NULL
+    "status" "movieStatus" NOT NULL DEFAULT 'unseen'
 );

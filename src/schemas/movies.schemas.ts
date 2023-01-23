@@ -8,21 +8,41 @@ export type Movie = {
 }
 
 export const MovieSchema = {
-    name: Joi.string().required,
-    platformId: Joi.number().required,
-    genreId: Joi.number().required,
+    name: Joi.string().required(),
+    platformId: Joi.number().required(),
+    genreId: Joi.number().required(),
 }
 
 export type UserMovie = {
     id?: number,
-    name: string,
-    userId: number,
+    usernameId: number,
     movieId: number,
-    comment: string,
-    status: string
+    comment?: string,
+    status?: string
 }
 
 export const UserMovieSchema = {
-    id: Joi.number().required,
+    usernameId: Joi.number().required(),
+    movieId: Joi.number().required()
+}
+
+export type UpdateUserMovie = {
+    id: number,
+    comment?: string,
+}
+
+
+export const UpdateUserMovieSchema = {
+    id: Joi.number().required(),
     comment: Joi.string()
 }
+
+export type WishlistMovie = {
+    id: number,
+    username: string,
+    movie: string,
+    genre: string,
+    platform: string,
+    comment: string,
+    status: string
+  }
