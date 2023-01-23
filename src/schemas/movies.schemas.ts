@@ -46,3 +46,8 @@ export type WishlistMovie = {
     comment: string,
     status: string
   }
+
+export type QuantityMovie = {
+    genre: string,
+    numberOfMovies: number
+  }

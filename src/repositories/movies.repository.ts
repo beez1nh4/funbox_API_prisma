@@ -1,6 +1,6 @@
 import { QueryResult } from "pg";
 import {connection} from "../database/database.js";
-import { Movie } from "../schemas/movies.schemas.js";
+import { Movie, QuantityMovie } from "../schemas/movies.schemas.js";
 
 async function findMovies(): Promise <QueryResult <Movie>> {
     return connection.query("SELECT * FROM movies;");
@@ -37,7 +37,7 @@ async function movieIdExistsInDatabase(id: number): Promise <boolean> {
     return response
 }
 
-async function findQuantityOfMoviesByGenre(): Promise <QueryResult <object>> {
+async function findQuantityOfMoviesByGenre(): Promise <QueryResult <QuantityMovie>> {
     return connection.query(`
     SELECT genres.name AS "genre", 
     COALESCE(COUNT(movies."genreId"),0) AS "numberOfMovies" 
