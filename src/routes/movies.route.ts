@@ -6,6 +6,6 @@ const router = Router();
 
 router.get("/movies", listAllMovies);
 router.post("/movies", movieBodyValidation, postMovie)
-router.get("/moviesquantitybygender", listQuantityOfMoviesByGenre)
+router.get("/moviesquantitybygenre", listQuantityOfMoviesByGenre)
 
 export default router;
