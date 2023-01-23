@@ -11,7 +11,7 @@ export async function postMovie(req: Request, res: Response): Promise<void>{
     const body = req.body as Movie;
  
     try{
-        await movieRepository.insertMovie(body.name, body.platformId, body.genderId);
+        await movieRepository.insertMovie(body.name, body.platformId, body.genreId);
         res.sendStatus(201);
         return
     } catch (err){

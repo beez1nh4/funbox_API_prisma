@@ -5,9 +5,9 @@ async function findMovies(): Promise <QueryResult <any>> {
     return connection.query("SELECT * FROM movies;");
 }
 
-async function insertMovie(name:string, platformId: number, genderId: number): Promise<void> {
-    await connection.query('INSERT INTO movies ("name", "platformId", "genderId") VALUES ($1, $2, $3);',
-        [name, platformId, genderId]
+async function insertMovie(name:string, platformId: number, genreId: number): Promise<void> {
+    await connection.query('INSERT INTO movies ("name", "platformId", "genreId") VALUES ($1, $2, $3);',
+        [name, platformId, genreId]
         );
     return
 }
