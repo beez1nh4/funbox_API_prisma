@@ -37,11 +37,21 @@ async function movieIdExistsInDatabase(id: number): Promise <boolean> {
     return response
 }
 
+async function findQuantityOfMoviesByGenre(): Promise <QueryResult <object>> {
+    return connection.query(`
+    SELECT genres.name AS "genre", 
+    COALESCE(COUNT(movies."genreId"),0) AS "numberOfMovies" 
+    FROM genres 
+    LEFT JOIN movies ON genres.id = movies."genreId" 
+    GROUP BY genres.id;`);
+}
+
 const movieRepository = {
     findMovies,
     insertMovie,
     movieExistsInDatabase,
-    movieIdExistsInDatabase
+    movieIdExistsInDatabase,
+    findQuantityOfMoviesByGenre
 }
 
 export default movieRepository;

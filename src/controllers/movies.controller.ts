@@ -19,3 +19,8 @@ export async function postMovie(req: Request, res: Response): Promise<void>{
         return
     }
 }
+
+export async function listQuantityOfMoviesByGenre(req: Request, res: Response): Promise<object> {
+    const result = await movieRepository.findQuantityOfMoviesByGenre();
+    return res.send(result.rows)
+}
