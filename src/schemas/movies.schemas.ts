@@ -7,11 +7,11 @@ export type Movie = {
     genreId: number
 }
 
-export const MovieSchema = {
+export const MovieSchema = Joi.object({
     name: Joi.string().required(),
     platformId: Joi.number().required(),
     genreId: Joi.number().required(),
-}
+})
 
 export type UserMovie = {
     id?: number,
@@ -21,10 +21,10 @@ export type UserMovie = {
     status?: string
 }
 
-export const UserMovieSchema = {
+export const UserMovieSchema = Joi.object({
     usernameId: Joi.number().required(),
     movieId: Joi.number().required()
-}
+})
 
 export type UpdateUserMovie = {
     id: number,
@@ -32,10 +32,10 @@ export type UpdateUserMovie = {
 }
 
 
-export const UpdateUserMovieSchema = {
+export const UpdateUserMovieSchema = Joi.object({
     id: Joi.number().required(),
     comment: Joi.string()
-}
+})
 
 export type WishlistMovie = {
     id: number,

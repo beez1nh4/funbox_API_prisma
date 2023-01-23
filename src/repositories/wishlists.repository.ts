@@ -1,7 +1,8 @@
 import { QueryResult } from "pg";
 import {connection} from "../database/database.js";
+import { WishlistMovie } from "../schemas/movies.schemas.js";
 
-async function findMoviesInWishListByUsername(username: string): Promise <QueryResult <any>> {
+async function findMoviesInWishListByUsername(username: string): Promise <QueryResult <WishlistMovie>> {
     return connection.query(`
     SELECT "usersMovies".id, usernames.name AS "username", movies.name AS "movie", genres.name AS "genre", platforms.name AS "platform", "usersMovies".comment, "usersMovies".status 
     FROM "usersMovies" 
