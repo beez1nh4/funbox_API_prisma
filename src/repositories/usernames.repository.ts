@@ -1,25 +1,28 @@
-import { QueryResult } from "pg";
-import {connection} from "../database/database.js";
+import { usernames } from "@prisma/client";
+import prisma from "../database/database.js";
 import { Label } from "../schemas/label.schema.js";
 
-async function findUsernames(): Promise <QueryResult <Label>> {
-    return connection.query("SELECT * FROM usernames;");
+async function findUsernames(): Promise <usernames[]> {
+    return prisma.usernames.findMany()
 }
 
 async function insertUsername(name:string): Promise<void> {
-    await connection.query('INSERT INTO usernames ("name") VALUES ($1);',
-        [name]
-        );
+    await prisma.usernames.create({
+        data: {
+            name
+        }
+    })
     return
 }
 
 async function usernameExistsInDatabase(name: string): Promise <boolean> {
     let response: boolean = true
-    const usernameExists = await connection.query(
-        'SELECT * FROM usernames WHERE name=$1;',
-        [name]
-    );
-    if (!usernameExists.rows[0]){
+    const usernameExists = await prisma.usernames.findFirst({
+        where:{
+            name
+        }
+    })
+    if (!usernameExists){
         response = false;
     }
     return response
@@ -27,11 +30,12 @@ async function usernameExistsInDatabase(name: string): Promise <boolean> {
 
 async function usernameIdExistsInDatabase(id: number): Promise <boolean> {
     let response: boolean = true
-    const usernameIdExists = await connection.query(
-        'SELECT * FROM usernames WHERE id=$1;',
-        [id]
-    );
-    if (!usernameIdExists.rows[0]){
+    const usernameIdExists = await prisma.usernames.findFirst({
+        where:{
+            id
+        }
+    })
+    if (!usernameIdExists){
         response = false;
     }
     return response

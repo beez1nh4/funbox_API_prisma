@@ -8,7 +8,7 @@ export async function listWishlistByUsername(req: Request<{ username: string}>, 
 
     try{
     const result = await wishlistRepository.findMoviesInWishListByUsername(params.username);
-    return res.send(result.rows)
+    return res.send(result)
     } catch (err){
         res.sendStatus(500);
         return

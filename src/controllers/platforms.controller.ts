@@ -5,7 +5,7 @@ import platformService from "../services/platforms.service.js";
 
 export async function listAllPlatforms(req: Request, res: Response): Promise<object> {
     const result = await platformRepository.findPlatforms();
-    return res.send(result.rows)
+    return res.send(result)
 }
 
 export async function postPlatform(req: Request, res: Response): Promise<void>{

@@ -5,7 +5,7 @@ import movieService from "../services/movies.service.js";
 
 export async function listAllMovies(req: Request, res: Response): Promise<object> {
     const result = await movieRepository.findMovies();
-    return res.send(result.rows)
+    return res.send(result)
 }
 
 export async function postMovie(req: Request, res: Response): Promise<void>{
@@ -22,5 +22,5 @@ export async function postMovie(req: Request, res: Response): Promise<void>{
 
 export async function listQuantityOfMoviesByGenre(req: Request, res: Response): Promise<object> {
     const result = await movieRepository.findQuantityOfMoviesByGenre();
-    return res.send(result.rows)
+    return res.send(result)
 }

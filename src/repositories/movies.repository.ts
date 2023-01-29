@@ -1,25 +1,31 @@
+import { movies } from "@prisma/client";
 import { QueryResult } from "pg";
-import {connection} from "../database/database.js";
-import { Movie, QuantityMovie } from "../schemas/movies.schemas.js";
+import prisma from "../database/database.js";
+import { CountExample, CountGenre, Movie, QuantityMovie } from "../schemas/movies.schemas.js";
 
-async function findMovies(): Promise <QueryResult <Movie>> {
-    return connection.query("SELECT * FROM movies;");
+async function findMovies(): Promise <movies[]> {
+    return prisma.movies.findMany();
 }
 
 async function insertMovie(name:string, platformId: number, genreId: number): Promise<void> {
-    await connection.query('INSERT INTO movies ("name", "platformId", "genreId") VALUES ($1, $2, $3);',
-        [name, platformId, genreId]
-        );
+    await prisma.movies.create({
+        data:{
+            name,
+            platformId,
+            genreId
+        }
+    })
     return
 }
 
 async function movieExistsInDatabase(name: string): Promise <boolean> {
     let response: boolean = true
-    const movieExists = await connection.query(
-        'SELECT * FROM movies WHERE name=$1;',
-        [name]
-    );
-    if (!movieExists.rows[0]){
+    const movieExists = await prisma.movies.findFirst({
+        where:{
+            name
+        }
+    })
+    if (!movieExists){
         response = false;
     }
     return response
@@ -27,25 +33,46 @@ async function movieExistsInDatabase(name: string): Promise <boolean> {
 
 async function movieIdExistsInDatabase(id: number): Promise <boolean> {
     let response: boolean = true
-    const movieIdExists = await connection.query(
-        'SELECT * FROM movies WHERE id=$1;',
-        [id]
-    );
-    if (!movieIdExists.rows[0]){
+    const movieIdExists = await prisma.movies.findFirst({
+        where:{
+            id
+        }
+    })
+    if (!movieIdExists){
         response = false;
     }
     return response
 }
 
-async function findQuantityOfMoviesByGenre(): Promise <QueryResult <QuantityMovie>> {
-    return connection.query(`
+async function findQuantityOfMoviesByGenre(): Promise <CountGenre[]> {
+/*     return connection.query(`
     SELECT genres.name AS "genre", 
     COALESCE(COUNT(movies."genreId"),0) AS "numberOfMovies" 
     FROM genres 
     LEFT JOIN movies ON genres.id = movies."genreId" 
-    GROUP BY genres.id;`);
+    GROUP BY genres.id;`); */
+    const quantityArray = await prisma.movies.groupBy({
+    by: ["genreId"],
+    _count: true
+    })
+    let auxArray: CountGenre[] = []
+    await Promise.all (quantityArray.map(async quantityItem => {
+        const quantityObject = await getGenreName(quantityItem)
+        auxArray.push(quantityObject)
+    } ))
+    return auxArray
 }
-
+async function getGenreName(quantityItem: CountExample){
+    const genre = await prisma.genres.findFirst({
+        where:{
+            id: quantityItem.genreId
+        }
+    })
+    return {
+        genre: genre?.name,
+        numberOfMovies: quantityItem._count
+    }
+}
 const movieRepository = {
     findMovies,
     insertMovie,

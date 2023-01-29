@@ -5,7 +5,7 @@ import usernameService from "../services/usernames.service.js";
 
 export async function listAllUsernames(req: Request, res: Response): Promise<object> {
     const result = await usernameRepository.findUsernames();
-    return res.send(result.rows)
+    return res.send(result)
 }
 
 export async function postUsername(req: Request, res: Response): Promise<void>{

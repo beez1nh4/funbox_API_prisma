@@ -1,25 +1,29 @@
-import { QueryResult } from "pg";
-import {connection} from "../database/database.js";
+import { genres } from "@prisma/client";
+import prisma from "../database/database.js";
 import { Label } from "../schemas/label.schema.js";
 
-async function findGenres(): Promise <QueryResult <Label>> {
-    return connection.query("SELECT * FROM genres;");
+async function findGenres(): Promise <genres[]> {
+    return prisma.genres.findMany();
 }
 
 async function insertGenre(name:string): Promise<void> {
-    await connection.query('INSERT INTO genres ("name") VALUES ($1);',
-        [name]
-        );
+    await prisma.genres.create({
+        data: {
+            name
+        }
+    })
     return
 }
 
 async function genreExistsInDatabase(name: string): Promise <boolean> {
     let response: boolean = true
-    const genreExists = await connection.query(
-        'SELECT * FROM genres WHERE name=$1;',
-        [name]
-    );
-    if (!genreExists.rows[0]){
+    const genreExists = await prisma.genres.findFirst({
+        where: {
+            name
+        }
+    })
+
+    if (!genreExists){
         response = false;
     }
     return response
@@ -27,11 +31,13 @@ async function genreExistsInDatabase(name: string): Promise <boolean> {
 
 async function genreIdExistsInDatabase(id: number): Promise <boolean> {
     let response: boolean = true
-    const genreIdExists = await connection.query(
-        'SELECT * FROM genres WHERE id=$1;',
-        [id]
-    );
-    if (!genreIdExists.rows[0]){
+    const genreIdExists = await prisma.genres.findFirst({
+        where: {
+            id
+        }
+    })
+
+    if (!genreIdExists){
         response = false;
     }
     return response

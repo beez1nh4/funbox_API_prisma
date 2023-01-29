@@ -5,7 +5,7 @@ import genreService from "../services/genres.service.js";
 
 export async function listAllGenres(req: Request, res: Response): Promise<object> {
     const result = await genreRepository.findGenres();
-    return res.send(result.rows)
+    return res.send(result)
 }
 
 export async function postGenre(req: Request, res: Response): Promise<void>{

@@ -41,9 +41,9 @@ export type WishlistMovie = {
     id: number,
     username: string,
     movie: string,
-    genre: string,
-    platform: string,
-    comment: string,
+    genre: string | undefined,
+    platform: string | undefined,
+    comment: string | null,
     status: string
   }
 
@@ -51,3 +51,27 @@ export type QuantityMovie = {
     genre: string,
     numberOfMovies: number
   }
+
+export type Wish = {
+    id: number,
+    movieId: number,
+    comment: string | null,
+    status: string,
+    usernames: {
+        name: string
+    }     
+    ,
+    movies:{
+        name: string
+    }          
+}
+
+export type CountExample = {
+    _count: number,
+    genreId: number
+  }
+
+export type CountGenre = {
+    genre: string | undefined,
+    numberOfMovies: number
+}

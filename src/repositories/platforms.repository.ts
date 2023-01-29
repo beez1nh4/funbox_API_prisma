@@ -1,25 +1,28 @@
-import { QueryResult } from "pg";
-import {connection} from "../database/database.js";
+import { platforms } from "@prisma/client";
+import prisma from "../database/database.js";
 import { Label } from "../schemas/label.schema.js";
 
-async function findPlatforms(): Promise <QueryResult <Label>> {
-    return connection.query("SELECT * FROM platforms;");
+async function findPlatforms(): Promise <platforms[]> {
+    return prisma.platforms.findMany();
 }
 
 async function insertPlatform(name:string): Promise<void> {
-    await connection.query('INSERT INTO platforms ("name") VALUES ($1);',
-        [name]
-        );
+    await prisma.platforms.create({
+        data: {
+            name
+        }
+    })
     return
 }
 
 async function platformExistsInDatabase(name: string): Promise <boolean> {
     let response: boolean = true
-    const platformExists = await connection.query(
-        'SELECT * FROM platforms WHERE name=$1;',
-        [name]
-    );
-    if (!platformExists.rows[0]){
+    const platformExists = await prisma.platforms.findFirst({
+        where:{
+            name
+        }
+    })
+    if (!platformExists){
         response = false;
     }
     return response
@@ -27,11 +30,12 @@ async function platformExistsInDatabase(name: string): Promise <boolean> {
 
 async function platformIdExistsInDatabase(id: number): Promise <boolean> {
     let response: boolean = true
-    const platformIdExists = await connection.query(
-        'SELECT * FROM platforms WHERE id=$1;',
-        [id]
-    );
-    if (!platformIdExists.rows[0]){
+    const platformIdExists = await prisma.platforms.findFirst({
+        where: {
+            id
+        }
+    })
+    if (!platformIdExists){
         response = false;
     }
     return response
