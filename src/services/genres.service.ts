@@ -1,4 +1,4 @@
-import genreRepository from "../repositories/genres.repository.js";
+import genreRepository from "../repositories/genres.repository";
 import { Response } from "express";
 
 export async function postOriginalGenre(res: Response, name: string): Promise<void>{

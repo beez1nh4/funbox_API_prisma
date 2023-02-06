@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
-import genreRepository from "../repositories/genres.repository.js";
-import { Label } from "../schemas/label.schema.js";
-import genreService from "../services/genres.service.js";
+import genreRepository from "../repositories/genres.repository";
+import { Label } from "../schemas/label.schema";
+import genreService from "../services/genres.service";
 
-export async function listAllGenres(req: Request, res: Response): Promise<object> {
+export async function listAllGenres(req: Request, res: Response): Promise<object | void> {
+    try{
     const result = await genreRepository.findGenres();
-    return res.send(result)
+    return res.send(result);
+    } catch{
+        res.sendStatus(404);
+    }
 }
 
 export async function postGenre(req: Request, res: Response): Promise<void>{
@@ -16,6 +20,7 @@ export async function postGenre(req: Request, res: Response): Promise<void>{
         res.sendStatus(201);
         return
     } catch (err){
+        res.sendStatus(400);
         return
     }
 }

@@ -1,5 +1,5 @@
-import prisma from "../database/database.js";
-import { Wish, WishlistMovie } from "../schemas/movies.schemas.js";
+import prisma from "../database/database";
+import { Wish, WishlistMovie } from "../schemas/movies.schemas";
 
 async function findMoviesInWishListByUsername(username: string): Promise <WishlistMovie[]> {
     /* return connection.query(`

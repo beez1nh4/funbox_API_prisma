@@ -1,4 +1,4 @@
-import platformRepository from "../repositories/platforms.repository.js";
+import platformRepository from "../repositories/platforms.repository";
 import { Response } from "express";
 
 export async function postOriginalPlatform(res: Response, name: string): Promise<void>{

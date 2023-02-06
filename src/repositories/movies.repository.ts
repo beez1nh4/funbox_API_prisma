@@ -1,7 +1,7 @@
 import { movies } from "@prisma/client";
 import { QueryResult } from "pg";
-import prisma from "../database/database.js";
-import { CountExample, CountGenre, Movie, QuantityMovie } from "../schemas/movies.schemas.js";
+import prisma from "../database/database";
+import { CountExample, CountGenre, Movie, QuantityMovie } from "../schemas/movies.schemas";
 
 async function findMovies(): Promise <movies[]> {
     return prisma.movies.findMany();

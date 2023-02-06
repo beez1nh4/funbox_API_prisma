@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import movieRepository from "../repositories/movies.repository.js";
-import { Movie } from "../schemas/movies.schemas.js";
-import movieService from "../services/movies.service.js";
+import movieRepository from "../repositories/movies.repository";
+import { Movie } from "../schemas/movies.schemas";
+import movieService from "../services/movies.service";
 
 export async function listAllMovies(req: Request, res: Response): Promise<object> {
     const result = await movieRepository.findMovies();
@@ -16,6 +16,7 @@ export async function postMovie(req: Request, res: Response): Promise<void>{
         res.sendStatus(201);
         return
     } catch (err){
+        res.sendStatus(400);
         return
     }
 }

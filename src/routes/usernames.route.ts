@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { listAllUsernames, postUsername } from "../controllers/usernames.controller.js";
-import { labelBodyValidation } from "../middlewares/verifyLabelBody.middleware.js";
+import { listAllUsernames, postUsername } from "../controllers/usernames.controller";
+import { labelBodyValidation } from "../middlewares/verifyLabelBody.middleware";
 
 
 const router = Router();

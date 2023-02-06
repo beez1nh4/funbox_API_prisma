@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { deleteMovieInWishListById, listWishlistByUsername, postMovieInWishlist, updateMovieInWishlist } from "../controllers/wishlists.controller.js";
-import { updateBodyValidation, wishlistBodyValidation } from "../middlewares/verifyWishlistBody.middleware.js";
+import { deleteMovieInWishListById, listWishlistByUsername, postMovieInWishlist, updateMovieInWishlist } from "../controllers/wishlists.controller";
+import { updateBodyValidation, wishlistBodyValidation } from "../middlewares/verifyWishlistBody.middleware";
 
 
 const router = Router();

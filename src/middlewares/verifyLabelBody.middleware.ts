@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Label, LabelSchema } from "../schemas/label.schema.js";
+import { Label, LabelSchema } from "../schemas/label.schema";
 
 export async function labelBodyValidation(req: Request, res: Response, next: NextFunction){
     const label = req.body as Label;

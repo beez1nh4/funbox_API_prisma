@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import usernameRepository from "../repositories/usernames.repository.js";
-import { Label } from "../schemas/label.schema.js";
-import usernameService from "../services/usernames.service.js";
+import usernameRepository from "../repositories/usernames.repository";
+import { Label } from "../schemas/label.schema";
+import usernameService from "../services/usernames.service";
 
 export async function listAllUsernames(req: Request, res: Response): Promise<object> {
     const result = await usernameRepository.findUsernames();
@@ -16,6 +16,7 @@ export async function postUsername(req: Request, res: Response): Promise<void>{
         res.sendStatus(201);
         return
     } catch (err){
+        res.sendStatus(400);
         return
     }
 }

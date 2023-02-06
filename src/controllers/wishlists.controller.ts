@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import wishlistRepository from "../repositories/wishlists.repository.js";
-import { UpdateUserMovie, UserMovie, WishlistMovie } from "../schemas/movies.schemas.js";
-import wishlistService from "../services/wishlists.service.js";
+import wishlistRepository from "../repositories/wishlists.repository";
+import { UpdateUserMovie, UserMovie, WishlistMovie } from "../schemas/movies.schemas";
+import wishlistService from "../services/wishlists.service";
 
 export async function listWishlistByUsername(req: Request<{ username: string}>, res: Response): (Promise<object | void>) {
     const params = req.params;
@@ -10,7 +10,7 @@ export async function listWishlistByUsername(req: Request<{ username: string}>, 
     const result = await wishlistRepository.findMoviesInWishListByUsername(params.username);
     return res.send(result)
     } catch (err){
-        res.sendStatus(500);
+        res.sendStatus(400);
         return
     }
 }
@@ -23,6 +23,7 @@ export async function postMovieInWishlist(req: Request, res: Response): Promise<
         res.sendStatus(201);
         return
     } catch (err){
+        res.sendStatus(400);
         return
     }
 }
@@ -41,7 +42,7 @@ export async function updateMovieInWishlist(req: Request, res: Response): Promis
         res.sendStatus(200);
         return
     } catch (err){
-        res.sendStatus(500);
+        res.sendStatus(400);
         return
     }
 }

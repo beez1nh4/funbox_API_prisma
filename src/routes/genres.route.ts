@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { listAllGenres, postGenre } from "../controllers/genres.controller.js";
-import { labelBodyValidation } from "../middlewares/verifyLabelBody.middleware.js";
+import { listAllGenres, postGenre } from "../controllers/genres.controller";
+import { labelBodyValidation } from "../middlewares/verifyLabelBody.middleware";
 
 const router = Router();
 

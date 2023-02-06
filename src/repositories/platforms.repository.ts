@@ -1,6 +1,5 @@
 import { platforms } from "@prisma/client";
-import prisma from "../database/database.js";
-import { Label } from "../schemas/label.schema.js";
+import prisma from "../database/database";
 
 async function findPlatforms(): Promise <platforms[]> {
     return prisma.platforms.findMany();

@@ -1,7 +1,7 @@
-import wishlistRepository from "../repositories/wishlists.repository.js";
+import wishlistRepository from "../repositories/wishlists.repository";
 import { Response } from "express";
-import usernameRepository from "../repositories/usernames.repository.js";
-import movieRepository from "../repositories/movies.repository.js";
+import usernameRepository from "../repositories/usernames.repository";
+import movieRepository from "../repositories/movies.repository";
 
 export async function postOriginalWishlistMovie(res: Response, usernameId: number, movieId: number): Promise<void>{
 

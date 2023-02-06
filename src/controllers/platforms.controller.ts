@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import platformRepository from "../repositories/platforms.repository.js";
-import { Label } from "../schemas/label.schema.js";
-import platformService from "../services/platforms.service.js";
+import platformRepository from "../repositories/platforms.repository";
+import { Label } from "../schemas/label.schema";
+import platformService from "../services/platforms.service";
 
 export async function listAllPlatforms(req: Request, res: Response): Promise<object> {
     const result = await platformRepository.findPlatforms();
@@ -16,6 +16,7 @@ export async function postPlatform(req: Request, res: Response): Promise<void>{
         res.sendStatus(201);
         return
     } catch (err){
+        res.sendStatus(400);
         return
     }
 }

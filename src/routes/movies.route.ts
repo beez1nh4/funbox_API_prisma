@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { listAllMovies, listQuantityOfMoviesByGenre, postMovie } from "../controllers/movies.controller.js";
-import { movieBodyValidation } from "../middlewares/verifyMovieBody.middleware.js";
+import { listAllMovies, listQuantityOfMoviesByGenre, postMovie } from "../controllers/movies.controller";
+import { movieBodyValidation } from "../middlewares/verifyMovieBody.middleware";
 
 const router = Router();
 

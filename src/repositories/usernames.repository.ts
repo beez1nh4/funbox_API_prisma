@@ -1,6 +1,5 @@
 import { usernames } from "@prisma/client";
-import prisma from "../database/database.js";
-import { Label } from "../schemas/label.schema.js";
+import prisma from "../database/database";
 
 async function findUsernames(): Promise <usernames[]> {
     return prisma.usernames.findMany()

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Movie, MovieSchema } from "../schemas/movies.schemas.js";
+import { Movie, MovieSchema } from "../schemas/movies.schemas";
 
 export async function movieBodyValidation(req: Request, res: Response, next: NextFunction){
     const label = req.body as Movie;

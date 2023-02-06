@@ -1,6 +1,5 @@
 import { genres } from "@prisma/client";
-import prisma from "../database/database.js";
-import { Label } from "../schemas/label.schema.js";
+import prisma from "../database/database";
 
 async function findGenres(): Promise <genres[]> {
     return prisma.genres.findMany();

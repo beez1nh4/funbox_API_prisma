@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { UpdateUserMovie, UpdateUserMovieSchema, UserMovie, UserMovieSchema } from "../schemas/movies.schemas.js";
+import { UpdateUserMovie, UpdateUserMovieSchema, UserMovie, UserMovieSchema } from "../schemas/movies.schemas";
 
 export async function wishlistBodyValidation(req: Request, res: Response, next: NextFunction){
     const label = req.body as UserMovie;

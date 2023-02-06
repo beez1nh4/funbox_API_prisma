@@ -1,4 +1,4 @@
-import usernameRepository from "../repositories/usernames.repository.js";
+import usernameRepository from "../repositories/usernames.repository";
 import { Response } from "express";
 
 export async function postOriginalUsername(res: Response, name: string): Promise<void>{

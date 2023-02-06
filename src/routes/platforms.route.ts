@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { listAllPlatforms, postPlatform } from "../controllers/platforms.controller.js";
-import { labelBodyValidation } from "../middlewares/verifyLabelBody.middleware.js";
+import { listAllPlatforms, postPlatform } from "../controllers/platforms.controller";
+import { labelBodyValidation } from "../middlewares/verifyLabelBody.middleware";
 
 
 const router = Router();
