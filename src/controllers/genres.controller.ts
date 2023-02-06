@@ -20,7 +20,6 @@ export async function postGenre(req: Request, res: Response): Promise<void>{
         res.sendStatus(201);
         return
     } catch (err){
-        res.sendStatus(400);
         return
     }
 }

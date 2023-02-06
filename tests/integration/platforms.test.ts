@@ -25,7 +25,7 @@ describe("GET /platforms", () => {
     expect(response.body).toEqual([]);
   });
 
-  it("should respond with status 200 and genre data if there are platforms", async () => {
+  it("should respond with status 200 and platform data if there are platforms", async () => {
     const platform = await createPlatform();
 
     const response = await server.get("/platforms");
@@ -49,7 +49,7 @@ describe("POST /platforms", () => {
       expect(response.status).toBe(400);
     });
   
-    it("should respond with status 400 if send correct object", async () => {
+    it("should respond with status 201 if send correct object", async () => {
         const response = await server.post("/platforms").send({
             name: faker.name.firstName()
         });

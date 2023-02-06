@@ -25,7 +25,7 @@ describe("GET /usernames", () => {
     expect(response.body).toEqual([]);
   });
 
-  it("should respond with status 200 and genre data if there are usernames", async () => {
+  it("should respond with status 200 and username data if there are usernames", async () => {
     const username = await createUsername();
 
     const response = await server.get("/usernames");
@@ -49,7 +49,7 @@ describe("POST /usernames", () => {
       expect(response.status).toBe(400);
     });
   
-    it("should respond with status 400 if send correct object", async () => {
+    it("should respond with status 201 if send correct object", async () => {
         const response = await server.post("/usernames").send({
             name: faker.name.firstName()
         });

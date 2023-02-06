@@ -49,7 +49,7 @@ describe("POST /genres", () => {
       expect(response.status).toBe(400);
     });
   
-    it("should respond with status 400 if send correct object", async () => {
+    it("should respond with status 201 if send correct object", async () => {
         const response = await server.post("/genres").send({
             name: faker.name.firstName()
         });

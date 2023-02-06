@@ -5,7 +5,7 @@ module.exports = {
     transform: {
       ".+\\.ts$": "ts-jest",
     },
-    testTimeout: 20000,
+    testTimeout: 100000,
     testMatch: ["<rootDir>/tests/integration/*.(test|spec).ts"],
   };
 

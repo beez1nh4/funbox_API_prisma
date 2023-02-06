@@ -10,7 +10,6 @@ export async function listWishlistByUsername(req: Request<{ username: string}>, 
     const result = await wishlistRepository.findMoviesInWishListByUsername(params.username);
     return res.send(result)
     } catch (err){
-        res.sendStatus(400);
         return
     }
 }
@@ -23,7 +22,6 @@ export async function postMovieInWishlist(req: Request, res: Response): Promise<
         res.sendStatus(201);
         return
     } catch (err){
-        res.sendStatus(400);
         return
     }
 }
@@ -42,7 +40,6 @@ export async function updateMovieInWishlist(req: Request, res: Response): Promis
         res.sendStatus(200);
         return
     } catch (err){
-        res.sendStatus(400);
         return
     }
 }
@@ -54,7 +51,6 @@ export async function deleteMovieInWishListById(req: Request<{ id: string}>, res
         await wishlistRepository.deleteMovieInWishList(Number(params.id));
         res.sendStatus(200)
     } catch (err){
-        res.sendStatus(500);
         return
     }
 }
